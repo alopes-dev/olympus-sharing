@@ -1,6 +1,69 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "target": "es6",
+    "module": "commonjs",
+    "lib": [
+      "es2021"
+    ],
+    "allowJs": true,
+    "jsx": "react-native",
+    "sourceMap": false,
+    "noEmit": true,
+    "isolatedModules": true,
+    "rootDir": "./src",
+    "baseUrl": "./src",
+    "paths": {
+      "@root/*": [
+        "*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@configurations/*": [
+        "configurations/*"
+      ],
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@contexts/*": [
+        "contexts/*"
+      ],
+      "@helpers/*": [
+        "helpers/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@navigation/*": [
+        "navigation/*"
+      ],
+      "@screens/*": [
+        "screens/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ],
+      "@stores/*": [
+        "stores/*"
+      ]
+    },
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": false,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "__tests__",
+    "node_modules",
+    "babel.config.js",
+  ]
 }
