@@ -48,14 +48,14 @@ export const IconButtons = styled(Animated.View)`
   left: 0;
   right: 0;
   bottom: 0;
-  margin-top: ${RFPercentage(45)}px;
+  margin-top: ${RFPercentage(46)}px;
 `;
 
 export const IconButton = styled.TouchableOpacity`
-  background-color: #46424f;
-  width: ${RFPercentage(10)}px;
-  height: 40px;
-  border-radius: 5px;
+  background-color: #323031;
+  width: ${RFPercentage(8.7)}px;
+  height: 35px;
+  border-radius: 8px;
 
   display: flex;
   justify-content: center;

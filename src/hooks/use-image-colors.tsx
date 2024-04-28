@@ -1,47 +1,59 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { getColors, ImageColorsResult } from 'react-native-image-colors'
+import React, { useCallback, useEffect, useState } from "react";
+import { getColors, ImageColorsResult } from "react-native-image-colors";
 
-type useImageColorsProps = {
-  url: string
-}
+type UseImageColorsProps = {
+  url: string;
+};
+type TColors = {
+  background: string;
+  primary: string;
+  secondary: string;
+};
 
-type IOSColors = {
-  background: string
-  primary: string
-  secondary: string
-  detail: string
-  platform: 'ios'
-}
+type ReturnUseImageColors = {
+  color: string | null;
+  colors: TColors | null;
+};
 
-type AndroidColors = {
-  dominant: string
-  average: string
-  vibrant: string
-  darkVibrant: string
-  lightVibrant: string
-  darkMuted: string
-  lightMuted: string
-  muted: string
-  platform: 'android'
-}
-
-export const useImageColors = ({ url }: useImageColorsProps) => {
-  const [color, setColor] = useState<string | null>(null)
+export const useImageColors = ({
+  url,
+}: UseImageColorsProps): ReturnUseImageColors => {
+  const [color, setColor] = useState<string | null>(null);
+  const [colors, setColors] = useState<TColors | null>({
+    background: "#000000",
+    primary: "#000000",
+    secondary: "#000000",
+  });
 
   const handleGeColors = useCallback(async () => {
+    if (!url) return;
     const response = (await getColors(url, {
-      fallback: '#000000',
+      fallback: "#000000",
       cache: true,
       key: url,
-    })) as ImageColorsResult
+    })) as ImageColorsResult;
 
-    if (response.platform === 'ios') setColor(response.background)
-    if (response.platform === 'android') setColor(response.dominant)
-  }, [])
+    if (response.platform === "ios") {
+      setColor(response.background);
+      setColors({
+        background: response.background,
+        primary: response.primary,
+        secondary: response.secondary,
+      });
+    }
+    if (response.platform === "android") {
+      setColor(response.dominant);
+      setColors({
+        background: response.dominant,
+        primary: response.average,
+        secondary: response.vibrant,
+      });
+    }
+  }, [url]);
 
   useEffect(() => {
-    handleGeColors()
-  }, [handleGeColors])
+    handleGeColors();
+  }, [handleGeColors]);
 
-  return { color }
-}
+  return { color, colors };
+};

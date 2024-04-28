@@ -1,15 +1,16 @@
-import React from 'react'
-import { Platform } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Ionicons, FontAwesome6, AntDesign } from '@expo/vector-icons'
-import { useTheme } from 'styled-components'
-import { DiscoveryScreen, SharedInScreen } from '@root/screens'
-import OlympusScreen from '@root/screens/olympus'
+import React from "react";
+import { Platform } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons, FontAwesome6, AntDesign } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
+import { DiscoveryScreen, SharedInScreen } from "@root/screens";
+import OlympusScreen from "@root/screens/olympus";
+import SharedInStackNavigation from "./shared-in";
 
-const { Navigator, Screen } = createBottomTabNavigator()
+const { Navigator, Screen } = createBottomTabNavigator();
 
 export function AppRoutes() {
-  const theme = useTheme()
+  const theme = useTheme();
 
   return (
     <Navigator
@@ -21,14 +22,14 @@ export function AppRoutes() {
 
         tabBarActiveTintColor: theme.COLORS.dark.activeTintColor,
         tabBarInactiveTintColor: theme.COLORS.dark.inactiveTintColor,
-        tabBarLabelPosition: 'below-icon',
+        tabBarLabelPosition: "below-icon",
         tabBarIconStyle: {
           marginBottom: 4,
         },
         tabBarStyle: {
           height: 95,
           backgroundColor: theme.COLORS.dark.shape,
-          paddingVertical: Platform.OS === 'ios' ? 20 : 0,
+          paddingVertical: Platform.OS === "ios" ? 20 : 0,
         },
       }}
     >
@@ -43,7 +44,7 @@ export function AppRoutes() {
       />
       <Screen
         name="Shared in"
-        component={SharedInScreen}
+        component={SharedInStackNavigation}
         options={{
           tabBarIcon: ({ size, color }) => (
             <FontAwesome6 name="user-astronaut" color={color} size={size} />
@@ -70,5 +71,5 @@ export function AppRoutes() {
         }}
       />
     </Navigator>
-  )
+  );
 }

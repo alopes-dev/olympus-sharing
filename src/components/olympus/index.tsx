@@ -4,7 +4,6 @@ import { Ionicons, Feather, Fontisto } from "@expo/vector-icons";
 import * as S from "./olympus.styles";
 import { useImageColors } from "@root/hooks";
 import { View } from "react-native";
-import { Text } from "react-native";
 import Animated, {
   Extrapolation,
   interpolate,
@@ -13,12 +12,14 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 import {
+  ALL_OLYMPUS_SHAREABLE_DATA,
   HEADER_MAX_HEIGHT,
   HEADER_MIN_HEIGHT,
   ICONS_BUTTONS_MAX_TOP,
   ICONS_BUTTONS_MIN_TOP,
   SCROLL_DISTANCE,
 } from "./olympus.consts";
+import { AppSharedItem } from "../_shared";
 
 const URI = "https://avatars.githubusercontent.com/u/32274883?v=4";
 
@@ -96,15 +97,20 @@ const Olympus = () => {
         </S.IconButtons>
       </S.Banner>
       <Animated.ScrollView
-        style={{ paddingTop: HEADER_MAX_HEIGHT }}
-        contentContainerStyle={{ paddingBottom: HEADER_MIN_HEIGHT }}
+        style={{
+          paddingTop: HEADER_MAX_HEIGHT + 15,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+        contentContainerStyle={{ paddingBottom: HEADER_MIN_HEIGHT + 200 }}
         onScroll={handleScroll}
         scrollEventThrottle={16}
       >
-        {new Array(54).fill(null).map(() => (
-          <View key={Math.random().toString()}>
-            <Text style={{ color: "white" }}>Teyts</Text>
-          </View>
+        {ALL_OLYMPUS_SHAREABLE_DATA.map((item, index) => (
+          <AppSharedItem
+            sharebleData={item as any}
+            key={Math.random().toString()}
+          />
         ))}
       </Animated.ScrollView>
     </View>

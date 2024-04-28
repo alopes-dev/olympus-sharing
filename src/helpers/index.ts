@@ -1,4 +1,4 @@
-import { TOlympus } from '@root/types'
+import { TOlympus } from "@root/types";
 
 export const OlympusUserFormatted = (users: Array<any>): TOlympus[] => {
   return users?.map((user, index) => {
@@ -9,6 +9,10 @@ export const OlympusUserFormatted = (users: Array<any>): TOlympus[] => {
       lastName: user.name.last,
       picture: user.picture.medium,
       isOnline: index % 2 === 0 ? true : false,
-    }
-  })
-}
+    };
+  });
+};
+
+export const generatorKeys = (key?: string) => {
+  return `${Math.random().toString()}-${key}-${Math.random().toString()}`;
+};
